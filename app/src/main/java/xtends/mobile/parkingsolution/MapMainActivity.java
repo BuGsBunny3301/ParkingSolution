@@ -31,16 +31,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.Locale;
+
 public class MapMainActivity extends FragmentActivity implements OnMapReadyCallback {
 
     public static final String TAG = MapMainActivity.class.getSimpleName();
     private static final int REQUEST_PERMISSION = 1;
-    private double wayLatitude = 0.0, wayLongitude = 0.0;
     private GoogleMap map;
     private Location currentLocation;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
-    private FusedLocationProviderClient locationProvider;
+    private FusedLocationProviderClient fusedLocationProvider;
     private boolean locationPermissionGranted, gpsEnabled;
 
     @Override
@@ -50,18 +51,36 @@ public class MapMainActivity extends FragmentActivity implements OnMapReadyCallb
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getPermissions();
 
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(10 * 1000); //10 seconds
+        locationRequest.setFastestInterval(5 * 1000); //5 seconds
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    if (location != null) {
+                        currentLocation = location;
+                        Toast.makeText(MapMainActivity.this, "CallbackHit", Toast.LENGTH_SHORT).show();
+                        updateMap();
+                        fusedLocationProvider.removeLocationUpdates(locationCallback);
+                    }
+                }
+            }
+        };
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
-    private void doOnCreate() {
-        locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(10 * 1000); //10 seconds
-        locationRequest.setFastestInterval(5 * 1000); //5 seconds
-
+    private void getLocation() {
+        fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this);
         new GpsUtils(this).turnGPSOn(new GpsUtils.onGpsListener() {
             @Override
             public void gpsStatus(boolean isGPSEnable) {
@@ -69,50 +88,32 @@ public class MapMainActivity extends FragmentActivity implements OnMapReadyCallb
             }
         });
 
-        locationCallback = new LocationCallback() {
+        fusedLocationProvider.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
             @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if(locationResult == null)
-                    return;
-
-                for(Location location: locationResult.getLocations()) {
-                    if(location != null) {
-                        wayLatitude = location.getLatitude();
-                        wayLongitude = location.getLongitude();
-                    }
+            public void onSuccess(Location location) {
+                if(location != null) {
+                    currentLocation = location;
+                    Toast.makeText(MapMainActivity.this, "Lat: " + location.getLatitude() + " Lng: " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+                    updateMap();
+                } else {
+                    fusedLocationProvider.requestLocationUpdates(locationRequest, locationCallback, null);
                 }
             }
-        };
+        });
     }
 
-    private void getLocation() {
-        try {
-            if(locationPermissionGranted) {
-                locationProvider.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        currentLocation = location;
-                    }
-                });
-            }
-            updateMap();
-        } catch (SecurityException ex) {
-            Log.e(TAG, "Exception in getLocation: " + ex.getMessage());
-        }
-    }
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        locationProvider = LocationServices.getFusedLocationProviderClient(this);
         getLocation();
     }
 
     private void updateMap() {
         if(currentLocation != null) {
             map.clear();
-            float zoomLevel = 16.0f;
+            float zoomLevel = 9.0f;
             LatLng location = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
             map.addMarker(new MarkerOptions().position(location).title("Your Location"));
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel));
