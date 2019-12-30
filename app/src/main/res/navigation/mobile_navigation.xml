@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_map">
+
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="xtends.mobile.parkingsolution.fragments.ui.mapFragment.MapFragment"
+        android:label="Map"
+        tools:layout="@layout/map_fragment" />
+
+    <fragment
+        android:id="@+id/nav_all_spots"
+        android:name="xtends.mobile.parkingsolution.fragments.ui.allSpotsFragment.AllSpotsFragment"
+        android:label="Locations List"
+        tools:layout="@layout/all_spots_fragment" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="xtends.mobile.parkingsolution.fragments.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_tools"
+        android:name="xtends.mobile.parkingsolution.fragments.ui.tools.ToolsFragment"
+        android:label="@string/menu_tools"
+        tools:layout="@layout/fragment_tools" />
+
+    <fragment
+        android:id="@+id/nav_share"
+        android:name="xtends.mobile.parkingsolution.fragments.ui.share.ShareFragment"
+        android:label="@string/menu_share"
+        tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_send"
+        android:name="xtends.mobile.parkingsolution.fragments.ui.send.SendFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_send" />
+</navigation>

@@ -1,8 +1,10 @@
-package xtends.mobile.parkingsolution;
+package xtends.mobile.parkingsolution.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import xtends.mobile.parkingsolution.R;
 
 public class MainActivity extends AppCompatActivity {
 

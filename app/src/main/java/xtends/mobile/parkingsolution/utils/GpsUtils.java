@@ -1,4 +1,4 @@
-package xtends.mobile.parkingsolution;
+package xtends.mobile.parkingsolution.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
