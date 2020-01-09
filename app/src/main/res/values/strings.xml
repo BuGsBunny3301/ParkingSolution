@@ -16,4 +16,15 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="title_activity_main_drawer">MainDrawerActivity</string>
+
+    <string name="change_profile_pic">Change Profile \n Picture</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="first_name">FIRST NAME</string>
+    <string name="family_name">FAMILY NAME</string>
+    <string name="email">EMAIL</string>
+    <string name="mobile">MOBILE</string>
+    <string name="currency">CURRENCY</string>
+    <string name="my_wallet">MY WALLETS</string>
+    <string name="balance">Balance</string>
+    <string name="add_new_wallet">+ Add New Wallet</string>
 </resources>

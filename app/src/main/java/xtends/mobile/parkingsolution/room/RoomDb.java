@@ -11,10 +11,12 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import xtends.mobile.parkingsolution.models.Spot;
+import xtends.mobile.parkingsolution.models.User;
 
 
 @Database(entities = {
-        Spot.class
+        Spot.class,
+        User.class
 }, version = 1)
 @TypeConverters({DateConverter.class})
 public abstract class RoomDb extends RoomDatabase{
@@ -61,14 +63,21 @@ public abstract class RoomDb extends RoomDatabase{
         @Override
         protected Void doInBackground(Void... voids) {
 
-            //String name, double lat, double lng
 
             dbCalls.insertLocation(new Spot(
                     0,
                     "ParkHere",
-                    34.822,
-                    35.099,
+                    33.82,
+                    35.53,
                     ""
+            ));
+
+            dbCalls.insertUser(new User(
+                    0,
+                    "Lana",
+                    "Rhoades",
+                    "lanaInMe@gmail.com",
+                    78666666
             ));
 
             return null;

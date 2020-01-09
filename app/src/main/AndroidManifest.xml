@@ -17,6 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.SpotDetails"></activity>
+        <activity android:name=".activities.login.LoginActivity" />
         <activity
             android:name=".activities.MainDrawerActivity"
             android:label="@string/title_activity_main_drawer"
@@ -42,9 +44,7 @@
 
         <activity
             android:name=".activities.mainMap.MapMainActivity"
-            android:label="@string/title_activity_map_main">
-
-        </activity>
+            android:label="@string/title_activity_map_main" />
         <activity android:name=".activities.MainActivity" />
     </application>
 

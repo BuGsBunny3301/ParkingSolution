@@ -1,8 +1,6 @@
 package xtends.mobile.parkingsolution.fragments.ui.mapFragment;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -30,8 +28,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,12 +36,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xtends.mobile.parkingsolution.R;
-import xtends.mobile.parkingsolution.activities.mainMap.MapActivityViewModel;
 import xtends.mobile.parkingsolution.activities.mainMap.MapMainActivity;
 import xtends.mobile.parkingsolution.models.Spot;
 import xtends.mobile.parkingsolution.utils.GpsUtils;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment {
 
     public static final String TAG = MapMainActivity.class.getSimpleName();
     private static final int REQUEST_PERMISSION = 1;
@@ -95,11 +90,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION);
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -126,11 +116,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-        getLocation();
-    }
 
     private void getLocation() {
         new GpsUtils(getActivity()).turnGPSOn(new GpsUtils.onGpsListener() {
@@ -166,7 +151,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private void zoomToLocation() {
         if(currentLocation != null) {
             map.clear();
-            float zoomLevel = 12.0f;
+            float zoomLevel = 15.0f;
             LatLng location = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel));
 
@@ -199,10 +184,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         locationPermissionGranted = false;
         if (requestCode == REQUEST_PERMISSION) {// If request is cancelled, the result arrays are empty.
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                map.setMyLocationEnabled(true);
-                getLocation();
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                locationPermissionGranted = true;
+                if(map != null) {
+                    map.setMyLocationEnabled(true);
+                    getLocation();
+                }
             }
         }
     }

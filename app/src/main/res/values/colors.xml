@@ -3,4 +3,22 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <color name="brownishColor">#38415C</color>
+    <color name="grayText">#9494AD</color>
+    <color name="separator">#EBE5E5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray_background">#F9FAFE</color>
+    <color name="gray_nav_icons">#757575</color>
+    <color name="shade_gray">#646670</color>
+    <color name="light_gray">#CFCFCF</color>
+
+
+    <!--category colors list-->
+    <color name="car">#3098BA</color>
+    <color name="groshery">#E7B432</color>
+    <color name="gift">#79BE6F</color>
+
+    <color name="black">#000000</color>
 </resources>

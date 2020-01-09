@@ -13,9 +13,9 @@
             android:icon="@drawable/ic_list_black_24dp"
             android:title="Locations List" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="User Profile" />
         <item
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_menu_manage"

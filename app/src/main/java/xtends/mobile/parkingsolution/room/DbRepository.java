@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import xtends.mobile.parkingsolution.models.Spot;
+import xtends.mobile.parkingsolution.models.User;
 
 public class DbRepository {
 
@@ -20,23 +21,34 @@ public class DbRepository {
     }
 
     //region locationCalls
-
     public LiveData<List<Spot>> getAllSpots() {
         return dbCalls.getAllSpots();
     }
 
     public void insertLocation(Spot spot) {
-        new DbAsyncTask(dbCalls).execute(spot);
+        new InsertAsyncTask(dbCalls).execute(spot);
+    }
+    //endregion
+
+    //region user
+    public LiveData<List<User>> getAllUsers() {
+        return dbCalls.getAllUsers();
     }
 
+    public void insertUser(User user) {
+        new InsertAsyncTask(dbCalls).execute(user);
+    }
+
+    public void updateUser(User user) {
+        new UpdateAsyncTask(dbCalls).execute(user);
+    }
     //endregion
 
     //region asyncTasks
-
-    private static class DbAsyncTask extends AsyncTask<Object, Void, Void> {
+    private static class InsertAsyncTask extends AsyncTask<Object, Void, Void> {
         private DbCalls dbCalls;
 
-        DbAsyncTask(DbCalls dbCalls){
+        InsertAsyncTask(DbCalls dbCalls){
             this.dbCalls = dbCalls;
         }
 
@@ -45,10 +57,26 @@ public class DbRepository {
         protected Void doInBackground(Object... objects) {
             if(objects[0] instanceof Spot)
                 dbCalls.insertLocation((Spot) objects[0]);
+            if(objects[0] instanceof User)
+                dbCalls.insertUser((User) objects[0]);
             return null;
         }
     }
 
-    //endregion
+    private static class UpdateAsyncTask extends AsyncTask<Object, Void, Void> {
+        private DbCalls dbCalls;
 
+        UpdateAsyncTask(DbCalls dbCalls){
+            this.dbCalls = dbCalls;
+        }
+
+        //TODO: make this accept any type and just get called
+        @Override
+        protected Void doInBackground(Object... objects) {
+            if(objects[0] instanceof User)
+                dbCalls.updateUser((User) objects[0]);
+            return null;
+        }
+    }
+    //endregion
 }

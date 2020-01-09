@@ -21,7 +21,6 @@
                 android:id="@+id/location_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/ic_launcher_background"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -36,8 +35,23 @@
                 android:textStyle="bold"
                 android:layout_marginStart="15dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/parking_status"
+                app:layout_constraintStart_toEndOf="@+id/location_image"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/parking_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open"
+                android:textColor="#26CC62"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintTop_toBottomOf="@id/location_name"
                 app:layout_constraintStart_toEndOf="@+id/location_image"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
