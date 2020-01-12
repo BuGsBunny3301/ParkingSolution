@@ -1,4 +1,4 @@
-package xtends.mobile.parkingsolution.activities;
+package xtends.mobile.parkingsolution.activities.spotDetails;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,5 +12,7 @@ public class SpotDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spot_details);
+
+
     }
 }

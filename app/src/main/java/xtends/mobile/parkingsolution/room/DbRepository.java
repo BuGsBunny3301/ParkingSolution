@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import xtends.mobile.parkingsolution.models.Review;
 import xtends.mobile.parkingsolution.models.Spot;
 import xtends.mobile.parkingsolution.models.User;
 
@@ -44,6 +45,16 @@ public class DbRepository {
     }
     //endregion
 
+    //region review
+    public void insertReview(Review review){
+        new InsertAsyncTask(dbCalls).execute(review);
+    }
+
+    public LiveData<List<Review>> getAllReviews(int spotId) {
+        return dbCalls.getAllReviews(spotId);
+    }
+    //endregion
+
     //region asyncTasks
     private static class InsertAsyncTask extends AsyncTask<Object, Void, Void> {
         private DbCalls dbCalls;
@@ -59,6 +70,8 @@ public class DbRepository {
                 dbCalls.insertLocation((Spot) objects[0]);
             if(objects[0] instanceof User)
                 dbCalls.insertUser((User) objects[0]);
+            if(objects[0] instanceof Review)
+                dbCalls.insertReview((Review) objects[0]);
             return null;
         }
     }

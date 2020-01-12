@@ -10,13 +10,15 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import xtends.mobile.parkingsolution.models.Review;
 import xtends.mobile.parkingsolution.models.Spot;
 import xtends.mobile.parkingsolution.models.User;
 
 
 @Database(entities = {
         Spot.class,
-        User.class
+        User.class,
+        Review.class
 }, version = 1)
 @TypeConverters({DateConverter.class})
 public abstract class RoomDb extends RoomDatabase{
@@ -69,7 +71,9 @@ public abstract class RoomDb extends RoomDatabase{
                     "ParkHere",
                     33.82,
                     35.53,
-                    ""
+                    "",
+                    3.4,
+                    4.6
             ));
 
             dbCalls.insertUser(new User(

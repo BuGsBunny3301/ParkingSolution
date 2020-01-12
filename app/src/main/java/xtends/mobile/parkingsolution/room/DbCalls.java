@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
+import xtends.mobile.parkingsolution.models.Review;
 import xtends.mobile.parkingsolution.models.Spot;
 import xtends.mobile.parkingsolution.models.User;
 
@@ -32,6 +33,14 @@ public interface DbCalls {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     public void updateUser(User user);
+    //endregion
+
+    //region review
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertReview(Review review);
+
+    @Query("SELECT * FROM Review WHERE spotId = :spotId")
+    LiveData<List<Review>> getAllReviews(int spotId);
     //endregion
 
 }

@@ -20,13 +20,19 @@ public class Spot implements Serializable {
     private double lng;
     @ColumnInfo(name = "imageUrl")
     private String imageUrl;
+    @ColumnInfo(name = "rating")
+    private double rating;
+    @ColumnInfo(name = "pricePerHour")
+    private double pricePerHour;
 
-    public Spot(int id, String name, double lat, double lng, String imageUrl) {
+    public Spot(int id, String name, double lat, double lng, String imageUrl, double rating, double pricePerHour) {
         this.id = id;
         this.name = name;
         this.lat = lat;
         this.lng = lng;
         this.imageUrl = imageUrl;
+        this.rating = rating;
+        this.pricePerHour = pricePerHour;
     }
 
     public int getId() {
@@ -67,5 +73,21 @@ public class Spot implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public double getPricePerHour() {
+        return pricePerHour;
+    }
+
+    public void setPricePerHour(double pricePerHour) {
+        this.pricePerHour = pricePerHour;
     }
 }
