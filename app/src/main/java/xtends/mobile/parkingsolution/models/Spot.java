@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity
 public class Spot implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
     @ColumnInfo(name = "name")
@@ -25,8 +25,7 @@ public class Spot implements Serializable {
     @ColumnInfo(name = "pricePerHour")
     private double pricePerHour;
 
-    public Spot(int id, String name, double lat, double lng, String imageUrl, double rating, double pricePerHour) {
-        this.id = id;
+    public Spot(String name, double lng, double lat, String imageUrl, double rating, double pricePerHour) {
         this.name = name;
         this.lat = lat;
         this.lng = lng;

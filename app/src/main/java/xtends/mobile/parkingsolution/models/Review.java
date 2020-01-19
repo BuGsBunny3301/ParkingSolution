@@ -14,11 +14,14 @@ public class Review implements Serializable {
     private int id;
     @ColumnInfo(name = "text")
     private String text;
+    @ColumnInfo(name = "rate")
+    private double rate;
     @ColumnInfo(name = "spotId")
     private int spotId;
 
-    public Review(String text, int spotId) {
+    public Review(String text, double rate, int spotId) {
         this.text = text;
+        this.rate = rate;
         this.spotId = spotId;
     }
 
@@ -44,5 +47,13 @@ public class Review implements Serializable {
 
     public void setSpotId(int spotId) {
         this.spotId = spotId;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 }

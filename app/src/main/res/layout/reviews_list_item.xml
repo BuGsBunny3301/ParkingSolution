@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -35,23 +36,25 @@
         app:layout_constraintTop_toBottomOf="@id/user_image_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:text="Sudden she seeing garret far regard. By hardly it direct if pretty up regret. Ability thought enquire settled prudent you sir. Or easy knew sold on well come year. Something consulted age extremely end procuring. Collecting preference he inquietude projection me in by. "
         android:textSize="14sp"
-        android:textColor="#000"/>
+        android:textColor="#000"
+        android:layout_marginBottom="14dp"/>
 
-    <view
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        app:layout_constraintTop_toBottomOf="@id/review_text_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="26sp"
-        android:layout_marginEnd="26sp"
-        android:background="#E2E2E2"/>
+<!--    <view-->
+<!--        android:id="@+id/divider"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1px"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/review_text_view"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginStart="26sp"-->
+<!--        android:layout_marginEnd="26sp"-->
+<!--        android:background="#E2E2E2"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

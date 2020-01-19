@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -37,10 +39,11 @@ import java.util.List;
 
 import xtends.mobile.parkingsolution.R;
 import xtends.mobile.parkingsolution.activities.mainMap.MapMainActivity;
+import xtends.mobile.parkingsolution.activities.spotDetails.SpotDetails;
 import xtends.mobile.parkingsolution.models.Spot;
 import xtends.mobile.parkingsolution.utils.GpsUtils;
 
-public class MapFragment extends Fragment {
+public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClickListener {
 
     public static final String TAG = MapMainActivity.class.getSimpleName();
     private static final int REQUEST_PERMISSION = 1;
@@ -109,6 +112,7 @@ public class MapFragment extends Fragment {
                     map.setMyLocationEnabled(true);
                     getLocation();
                 }
+                map.setOnInfoWindowClickListener(MapFragment.this);
             }
         });
 
@@ -170,6 +174,15 @@ public class MapFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Intent intent = new Intent(getActivity(), SpotDetails.class);
+        for(Spot spot: spotsList)
+            if(marker.getTitle().equals(spot.getName()))
+                intent.putExtra("selected_spot", spot);
+        startActivity(intent);
+    }
+
     //region permissions
     private void getPermissions() {
         if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -193,5 +206,7 @@ public class MapFragment extends Fragment {
             }
         }
     }
+
+
     //endregion
 }

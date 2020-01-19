@@ -16,12 +16,15 @@ import xtends.mobile.parkingsolution.models.User;
 @Dao
 public interface DbCalls {
 
-    //region location
+    //region spot
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertLocation(Spot spot);
 
     @Query("SELECT * FROM Spot")
     LiveData<List<Spot>> getAllSpots();
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    void updateSpot(Spot spot);
     //endregion
 
     //region user

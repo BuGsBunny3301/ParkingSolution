@@ -32,7 +32,7 @@ public class ReviewsListAdapter extends RecyclerView.Adapter<ReviewsListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        Review review = reviews.get(position);
     }
 
     @Override

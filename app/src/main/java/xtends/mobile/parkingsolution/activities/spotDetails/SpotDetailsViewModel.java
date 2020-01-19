@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import xtends.mobile.parkingsolution.models.Review;
+import xtends.mobile.parkingsolution.models.Spot;
 import xtends.mobile.parkingsolution.room.DbRepository;
 
 public class SpotDetailsViewModel extends AndroidViewModel {
@@ -26,6 +27,10 @@ public class SpotDetailsViewModel extends AndroidViewModel {
 
     public void insertReview(Review review) {
         dbRepository.insertReview(review);
+    }
+
+    public void updateSpot(Spot spot) {
+        dbRepository.updateSpot(spot);
     }
 
 }

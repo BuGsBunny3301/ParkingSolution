@@ -29,6 +29,10 @@ public class DbRepository {
     public void insertLocation(Spot spot) {
         new InsertAsyncTask(dbCalls).execute(spot);
     }
+
+    public void updateSpot(Spot spot) {
+        new UpdateAsyncTask(dbCalls).execute(spot);
+    }
     //endregion
 
     //region user
@@ -88,6 +92,8 @@ public class DbRepository {
         protected Void doInBackground(Object... objects) {
             if(objects[0] instanceof User)
                 dbCalls.updateUser((User) objects[0]);
+            else if(objects[0] instanceof Spot)
+                dbCalls.updateSpot((Spot) objects[0]);
             return null;
         }
     }
